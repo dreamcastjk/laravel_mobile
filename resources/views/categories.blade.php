@@ -16,15 +16,15 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="http://laravel-diplom-1.rdavydov.ru">Интернет Магазин</a>
+            <a class="navbar-brand" href="/">Интернет Магазин</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ><a href="http://laravel-diplom-1.rdavydov.ru">Все товары</a></li>
-                <li  class="active" ><a href="http://laravel-diplom-1.rdavydov.ru/categories">Категории</a>
+                <li ><a href="/">Все товары</a></li>
+                <li  class="active" ><a href="/categories">Категории</a>
                 </li>
-                <li ><a href="http://laravel-diplom-1.rdavydov.ru/basket">В корзину</a></li>
-                <li><a href="http://laravel-diplom-1.rdavydov.ru/reset">Сбросить проект в начальное состояние</a></li>
+                <li ><a href="/basket">В корзину</a></li>
+                <li><a href="/reset">Сбросить проект в начальное состояние</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -38,7 +38,7 @@
 <div class="container">
     <div class="starter-template">
         <div class="panel">
-            <a href="http://laravel-diplom-1.rdavydov.ru/mobiles">
+            <a href="/mobiles">
                 <img src="http://laravel-diplom-1.rdavydov.ru/storage/categories/mobile.jpg">
                 <h2>Мобильные телефоны</h2>
             </a>
@@ -47,7 +47,7 @@
             </p>
         </div>
         <div class="panel">
-            <a href="http://laravel-diplom-1.rdavydov.ru/portable">
+            <a href="/portable">
                 <img src="http://laravel-diplom-1.rdavydov.ru/storage/categories/portable.jpg">
                 <h2>Портативная техника</h2>
             </a>
@@ -56,7 +56,7 @@
             </p>
         </div>
         <div class="panel">
-            <a href="http://laravel-diplom-1.rdavydov.ru/appliances">
+            <a href="/appliances">
                 <img src="http://laravel-diplom-1.rdavydov.ru/storage/categories/appliance.jpg">
                 <h2>Бытовая техника</h2>
             </a>
