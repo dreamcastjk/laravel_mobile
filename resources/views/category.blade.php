@@ -1,3 +1,7 @@
+@php
+/* @var App\Category $category */
+@endphp
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -38,16 +42,10 @@
 <div class="container">
     <div class="starter-template">
         <h1>
-            @if ($category == 'mobiles')
-                Мобильные телефоны
-            @elseif ($category == 'portable')
-                Портативная техника
-            @elseif ($category == 'appliances')
-                Бытовая техника
-            @endif
+            {{ $category->name }}
         </h1>
         <p>
-            В этом разделе вы найдёте самые популярные мобильные телефонамы по отличным ценам!
+            {{ $category->description }}
         </p>
         <div class="row">
             <div class="col-sm-6 col-md-4">
