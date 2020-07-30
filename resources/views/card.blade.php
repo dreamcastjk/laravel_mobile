@@ -6,10 +6,8 @@
             <p>{{ $product->price }} руб.</p>
             <p>
                 <a href="{{ route('basket') }}" class="btn btn-primary" role="button">В корзину</a>
-                @isset($category)
-                    {{ $category->name }}
-                @endisset
-                <a href="{{ route('') }}" class="btn btn-default"
+                {{ $product->category->name }}
+                <a href="{{ route('product', [$product->category->code, $product->code]) }}" class="btn btn-default"
                    role="button">Подробнее</a>
             </p>
         </div>

@@ -27,7 +27,7 @@ class CategorySeeder extends Seeder
         ]);
 
         \App\Category::create([
-            'name' => 'Мобильные телефоны',
+            'name' => 'Бытовая техника',
             'code' => 'tech',
             'description' => 'Описание к разделу бытовой техники',
         ]);
