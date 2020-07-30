@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 
 /**
  * Class MainController
@@ -12,7 +13,8 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $products = Product::paginate(6);
+        return view('index', compact('products'));
     }
 
     public function categories()
@@ -27,8 +29,18 @@ class MainController extends Controller
         return view('category', compact('category'));
     }
 
-    public function product($product = 'iphone')
+    public function product($category, Product $product = null)
     {
-        return view('product', ['product' => $product]);
+        return view('product', compact('product'));
+    }
+
+    public function basket()
+    {
+        return view('basket');
+    }
+
+    public function basketPlace()
+    {
+        return view('order');
     }
 }
