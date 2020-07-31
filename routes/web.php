@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+Auth::routes([
+    'reset' => false,
+    'confirm' => false,
+    'verify' => false,
+]);
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
+Route::get('/home', 'HomeController@index')->name('index');
+
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/categories', 'MainController@categories')->name('categories');
 Route::get('/basket', 'BasketController@basket')->name('basket');
