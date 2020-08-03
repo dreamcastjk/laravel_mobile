@@ -8,8 +8,12 @@ Auth::routes([
     'verify' => false,
 ]);
 
+
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
-Route::get('/home', 'HomeController@index')->name('index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', 'HomeController@index')->name('index');
+});
 
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/categories', 'MainController@categories')->name('categories');
