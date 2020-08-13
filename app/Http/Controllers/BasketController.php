@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Product;
+use Auth;
 use Illuminate\Http\Request;
 
 class BasketController extends Controller
@@ -65,6 +66,11 @@ class BasketController extends Controller
             $order->products()->attach($productId);
         }
 
+        if (Auth::check()) {
+            $order->user_id = Auth::id();
+            $order->save();
+        }
+
         $product = Product::find($productId);
         session()->flash('success', 'Добавлен товар ' . $product->name);
 
@@ -75,12 +81,12 @@ class BasketController extends Controller
     {
         $orderId = session('orderId');
         if (is_null($orderId)) {
-            return view('basket', compact('order'));
+            return redirect()->route('basket');
         }
         $order = Order::find($orderId);
         if ($order->products->contains($productId)) {
             $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
-            if ($pivotRow->count() < 2) {
+            if ($pivotRow->count < 2) {
                 $order->products()->detach($productId);
             } else {
                 $pivotRow->count--;
