@@ -14,6 +14,7 @@ Route::group([
         Route::get('/orders', 'OrderController@index')->name('index');
     });
     Route::resource('categories', 'CategoryController');
+    Route::resource('products', 'ProductController');
 });
 
 /* GROUP */
