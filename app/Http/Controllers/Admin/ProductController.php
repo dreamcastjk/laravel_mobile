@@ -62,7 +62,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::get();
+        return view('auth.products.form', compact('product', 'categories'));
     }
 
     /**
@@ -74,7 +75,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        return redirect()->route('products.index');
     }
 
     /**
