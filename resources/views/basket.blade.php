@@ -22,7 +22,7 @@
                         <tr>
                             <td>
                                 <a href="{{ route('product', [$product->category->code, $product->code]) }}">
-                                    <img height="56px" src="http://laravel-diplom-1.rdavydov.ru/storage/products/iphone_x.jpg">
+                                    <img height="56px" src="{{ Storage::url($product->image) }}">
                                     {{ $product->name }}
                                 </a>
                             </td>
@@ -44,7 +44,7 @@
                                 </div>
                             </td>
                             <td>{{ $product->price }} руб.</td>
-                            <td>{{ $product->getPriceForCount()}} руб.</td>
+                            <td>{{ $product->price_for_count }} руб.</td>
                         </tr>
                     @endforeach
                 @endif

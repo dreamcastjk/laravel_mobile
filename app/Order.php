@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $user_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUserId($value)
  */
 class Order extends Model
 {
@@ -42,7 +44,7 @@ class Order extends Model
         $sum = 0;
         /* @var Product $product */
         foreach ($this->products as $product) {
-            $sum += $product->getPriceForCount();
+            $sum += $product->price_for_count;
         }
         return $sum;
     }

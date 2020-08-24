@@ -33,7 +33,7 @@
                     <li><a href="{{ route('login') }}">Панель администратора</a></li>
                 @endguest
                 @auth
-                    <li><a href="{{ route('home') }}">Панель администратора</a></li>
+                    <li><a href="{{ route('index') }}">Панель администратора</a></li>
                     <li><a href="{{ route('get-logout') }}">Выйти</a></li>
                 @endauth
             </ul>

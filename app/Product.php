@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $price_for_count
  */
 class Product extends Model
 {
@@ -40,11 +41,16 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function getPriceForCount()
+    function getPriceForCountAttribute()
     {
         if (!is_null($this->pivot)) {
             return $this->pivot->count * $this->price;
         }
         return $this->price;
+    }
+
+    public function getPriceForCount()
+    {
+
     }
 }
