@@ -4,17 +4,22 @@
 Auth::routes(['reset' => false, 'confirm' => false, 'verify' => false,]);
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 
-/* GROUP */
-Route::group([
-    'middleware' => 'auth',
-    'namespace' => 'Admin',
-    'prefix' => 'admin'
-], function () {
-    Route::group(['middleware' => 'is_admin'], function () {
-        Route::get('/orders', 'OrderController@index')->name('index');
+Route::middleware(['auth'])->group(function () {
+
+    Route::prefix('person')->namespace('Person')->as('person.')->group(function () {
+        Route::get('/orders', 'PersonController@index')->name('orders.index');
+        Route::get('/order/{order}', 'PersonController@show')->name('orders.show');
     });
-    Route::resource('categories', 'CategoryController');
-    Route::resource('products', 'ProductController');
+
+    /* GROUP */
+    Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+        Route::group(['middleware' => 'is_admin'], function () {
+            Route::get('/orders', 'OrderController@index')->name('index');
+            Route::get('/order/{order}', 'OrderController@show')->name('orders.show');
+        });
+        Route::resource('categories', 'CategoryController');
+        Route::resource('products', 'ProductController');
+    });
 });
 
 /* GROUP */
@@ -35,4 +40,4 @@ Route::group([
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/categories', 'MainController@categories')->name('categories');
 Route::get('/{category}', 'MainController@category')->name('category');
-Route::get('/{category}/{product:code}', 'MainController@product')->name('product');
+Route::get('/{category:code}/{product:code}', 'MainController@product')->name('product');

@@ -29,30 +29,31 @@
 
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li ><a
-                            href="{{ route('categories.index') }}">Категории</a></li>
-                    <li ><a href="{{ route('products.index') }}">Товары</a>
-                    </li>
-                    <li ><a href="#">Заказы</a></li>
+                    @admin
+                        <li ><a href="{{ route('categories.index') }}">Категории</a></li>
+                        <li ><a href="{{ route('products.index') }}">Товары</a></li>
+                        <li ><a href="{{ route('index') }}">Заказы</a></li>
+                    @else
+                        <li ><a href="{{ route('person.orders.index') }}">Заказы</a></li>
+                    @endadmin
+
                 </ul>
 
-                @guest
-                    <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                    @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Войти</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">Зарегистрироваться</a>
                         </li>
-                    </ul>
-                @endguest
-
-                @auth
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a href="{{ route('logout') }}" class="dropdown-item">Выйти</a>
-                    </div>
-                @endauth
-
+                    @endguest
+                    @auth
+                        <li>
+                            <a href="{{ route('get-logout') }}">Выйти</a>
+                        </li>
+                    @endauth
+                </ul>
             </div>
         </div>
     </nav>

@@ -65,6 +65,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function isAdmin()
     {
         return $this->is_admin === 1;

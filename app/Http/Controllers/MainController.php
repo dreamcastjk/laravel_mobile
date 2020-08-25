@@ -30,7 +30,7 @@ class MainController extends Controller
         return view('category', compact('category'));
     }
 
-    public function product($category, Product $product = null)
+    public function product(Category $category, Product $product = null)
     {
         return view('product', compact('product'));
     }
