@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\ProductsFilterRequest;
 use App\Product;
 use Auth;
+use Illuminate\Http\Request;
 
 /**
  * Class MainController
@@ -12,9 +14,27 @@ use Auth;
  */
 class MainController extends Controller
 {
-    public function index()
+    public function index(ProductsFilterRequest $request)
     {
-        $products = Product::paginate(6);
+//        dd($request->all());
+
+        $products_query = Product::query();
+
+        if ($request->filled('price_from')) {
+            $products_query->where('price', '>=', $request->price_from);
+        }
+
+        if ($request->filled('price_to')) {
+            $products_query->where('price', '<=', $request->price_to);
+        }
+
+        foreach (Product::$label_fields as $field) {
+            if ($request->has($field)) {
+                $products_query->where($field, 1);
+            }
+        }
+
+        $products = $products_query->paginate(6)->withPath('?'.$request->getQueryString());
         return view('index', compact('products'));
     }
 

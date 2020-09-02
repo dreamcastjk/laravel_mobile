@@ -42,6 +42,16 @@ class Product extends Model
 {
     protected $guarded = ['id'];
 
+    const LABEL_HIT = 'hit';
+    const LABEL_NEW = 'new';
+    const LABEL_RECOMMEND = 'recommend';
+
+    public static $label_fields = [
+        self::LABEL_HIT,
+        self::LABEL_NEW,
+        self::LABEL_RECOMMEND,
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

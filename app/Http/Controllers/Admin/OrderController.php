@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::whereStatus(1)->get();
+        $orders = Order::whereStatus(1)->paginate(2);
         return view('auth.orders.index', compact('orders'));
     }
 
