@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\ProductsFilterRequest;
 use App\Product;
-use Auth;
-use Illuminate\Http\Request;
 
 /**
  * Class MainController
@@ -16,9 +14,7 @@ class MainController extends Controller
 {
     public function index(ProductsFilterRequest $request)
     {
-//        dd($request->all());
-
-        $products_query = Product::query();
+        $products_query = Product::with('categories');
 
         if ($request->filled('price_from')) {
             $products_query->where('price', '>=', $request->price_from);
