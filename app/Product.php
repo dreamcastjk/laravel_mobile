@@ -13,10 +13,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $code
  * @property string|null $description
  * @property string|null $image
- * @property float $price
+ * @property float $price *
  * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Category $category
+ * @property \Illuminate\Support\Carbon|null $updated_at *
+ * @property int $new
+ * @property int $hit
+ * @property int $recommend
+ * @property-read \App\Category $category *
+ * @property-read mixed $price_for_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product query()
@@ -30,17 +34,25 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read mixed $price_for_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereHit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereNew($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereRecommend($value)
  */
 class Product extends Model
 {
     protected $guarded = ['id'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * @return float|int
+     */
     function getPriceForCountAttribute()
     {
         if (!is_null($this->pivot)) {
@@ -49,8 +61,42 @@ class Product extends Model
         return $this->price;
     }
 
-    public function getPriceForCount()
+    function setNewAttribute($value)
     {
+        $this->attributes['new'] = $value === 'on' ? 1 : 0;
+    }
 
+    function setHitAttribute($value)
+    {
+        $this->attributes['hit'] = $value === 'on' ? 1 : 0;
+    }
+
+    function setRecommendAttribute($value)
+    {
+        $this->attributes['recommend'] = $value === 'on' ? 1 : 0;
+    }
+
+    /**
+     * @return bool
+     */
+    function isHit()
+    {
+        return $this->hit === 1;
+    }
+
+    /**
+     * @return bool
+     */
+    function isNew()
+    {
+        return $this->new === 1;
+    }
+
+    /**
+     * @return bool
+     */
+    function isRecommend()
+    {
+        return $this->recommend === 1;
     }
 }

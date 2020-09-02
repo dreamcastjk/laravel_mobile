@@ -33,6 +33,8 @@ use Illuminate\Notifications\Notifiable;
  * @mixin \Eloquent
  * @property int $is_admin
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsAdmin($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Order[] $orders
+ * @property-read int|null $orders_count
  */
 class User extends Authenticatable
 {
